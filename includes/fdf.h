@@ -27,6 +27,7 @@
 
 # define WIDTH 1080
 # define HEIGHT 720
+# define SCALE 2
 # define TITLE "fdf_map"
 
 
@@ -59,8 +60,8 @@ typedef struct s_data {
 
 void	get_values(int fd,t_file *file);
 int	get_col(int fd,t_file *file);
-void put_pix_file(t_file *file, t_data *data);
-
+void put_pix(t_data *data,int color,int cordinate);
+void put_line(t_file *file, t_data *data);
 
 
 

@@ -1,64 +1,52 @@
 #include "fdf.h"
 
 
-
-int	**set_row(t_file *file)
+void    init_t_file(t_file *data)
 {
+    data->empty = 1;
+    data->member = 0;
+    data->n_member = 0;
+    data->points = (t_point*)malloc(sizeof(t_point));
+    data->row = 0;
+}
+
+void	set_row(t_file *data,char **col)
+{
+    t_point *temp;
     int i;
-    int **temp;
 
-    i = 0;
-    temp = (int **)malloc(sizeof(int *) * (file->row + 1));
-    while (i < file->row)
-    {
-        temp[i] = file->values[i];
-        i++;
-    }
-    free(file->values); 
-    return (temp);
-}
-
-
-int	get_col(int fd, t_file *file)
-{
-    int		i;
-    char	*gnl;
-    char	*col;
-    char	**temp;
-
-    i = 0;
-    gnl = get_next_line(fd);
-    if (gnl == NULL)
-        return (0);
-    col = ft_strtrim(gnl, " \n");
-    free(gnl);
-    temp = ft_split(col, ' ');
-    free(col);
-    if (file->column == 0)
-        while (temp[i++])
-            file->column++;
-    file->values = set_row(file);
-    file->values[file->row] = (int *)malloc(sizeof(int) * file->column);
     i = -1;
-    while (temp[++i])
-        file->values[file->row][i] = ft_atoi(temp[i]);
-    
-    i = 0;
-    while (temp[i])
-        free(temp[i++]);
-    free(temp);
-    return (1);
+    temp = NULL;
+
+    while (col[++i])
+    {
+        if(data->member >= data->empty)
+        {
+            temp = (t_point *)malloc(data->empty * 2 * sizeof(t_point));
+            data->points = ft_memmove(temp,data->points, 12 * data->member);
+            data->empty *= 2;
+        }
+        data->points[data->member].x = i;
+        data->points[data->member].y = data->row;
+        data->points[data->member].z = ft_atoi(col[i]);
+        data->member++;
+    }
+    data->row++;
 }
 
-void	get_values(int fd, t_file *file)
+void	get_values(int fd, t_file *data)
 {
-    file->row = 0;
-    file->column = 0;
-    file->values = NULL; 
+    char *values;
+    char **col;
+
     while (1)
     {
-        if (!get_col(fd, file))
+        values = get_next_line(fd);
+        if (!values)
             break;
-        file->row++;
+        col = ft_split(ft_strtrim(values," \n"),' ');
+        set_row(data,col);
+        free(values);
     }
+
 }

@@ -25,28 +25,31 @@
 # include <stdbool.h>
 # include <fcntl.h>
 
+
 # define WIDTH 1080
 # define HEIGHT 720
-# define SCALE 2
+# define SCALE 20
 # define TITLE "fdf_map"
 
 
+typedef	struct s_point{
+	int x;
+	int y;
+	int z;
+
+}			t_point;
+
 
 typedef	struct s_file{
-	int column;
+	t_point *points;
 	int row;
-	int **values;
+	int member;
+	int n_member;
+	int empty;
 
 }			t_file;
 
 
-typedef struct s_point{
-	int x1;
-	int x2;
-	int y1;
-	int y2;
-	int color;
-} 		t_point;
 
 
 typedef struct s_data {
@@ -58,12 +61,10 @@ typedef struct s_data {
 }               t_data;
 
 
-void	get_values(int fd,t_file *file);
-int	get_col(int fd,t_file *file);
-void put_pix(t_data *data,int color,int cordinate);
-void put_line(t_file *file, t_data *data);
-
-
+void	get_values(int fd, t_file *data);
+void	set_row(t_file *data,char **col);
+t_point    *set_points(t_file *data,t_point *temp);
+void    init_t_file(t_file *data);
 
 
 #endif

@@ -2,7 +2,7 @@
 compile: compile_libs compile_fdf reset_libs
 
 fast_run: compile_libs compile_fdf reset_libs
-	@./fdf
+	@valgrind ./fdf
 
 full_run: update_libs compile_libs compile_fdf reset_libs
 	@./fdf

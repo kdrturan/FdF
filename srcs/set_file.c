@@ -9,7 +9,7 @@ void	set_scale(t_file *file)
 	{
 		file->points[i].x *= SCALE;
 		file->points[i].y *= SCALE;
-		file->points[i].z *= SCALE;
+		file->points[i].z *= 1;
 		i++;
 	}
 }

@@ -28,7 +28,7 @@
 
 # define WIDTH 1080
 # define HEIGHT 720
-# define SCALE 2
+# define SCALE 20
 # define TITLE "fdf_map"
 
 
@@ -47,6 +47,9 @@ typedef	struct s_file{
 	int n_member;
 	int empty;
 	int column;
+	float x_rot;
+	float y_rot;
+	float z_rot;
 
 
 }			t_file;
@@ -72,6 +75,10 @@ void drawLine(t_data *data,t_point point1,t_point point2);
 void put_pix(t_data *data,t_point point);
 void	set_scale(t_file *file);
 
+
+void	apply_rot_matrix_map(t_file *file);
+static void	apply_rot_matrix_pt(t_point *point, float x, float y, float z);
+static void	init_rot_matrix(float matrix[4][4], float x, float y, float z);
 
 
 #endif

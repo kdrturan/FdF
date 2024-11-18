@@ -45,26 +45,46 @@ void	draw_map(t_data *data,t_file *file)
 
     j = 1;
 	i = 0;
-	while (i < file->member - 1)
+	while (i < file->member)
 	{
         if(file->column > j)
         {
             drawLine(data,file->points[i],file->points[i + 1]);
-            if (((file->row - 1)* SCALE ) != file->points[i].y)
+            if(i / file->column != file->row - 1)
                 drawLine(data,file->points[i],file->points[i + file->column]);
             j++;
         }
-        else 
+        else
         {
-            if (((file->row - 1)* SCALE ) == file->points[i].y)
-                drawLine(data,file->points[i],file->points[i + 1]);
-            else              
+            if(i / file->column != file->row - 1)
                 drawLine(data,file->points[i],file->points[i + file->column]);
             j = 1;
         }
-		i++;
+        i++;
+            printf("%d\n",(i / file->column));
+            printf("%d\n",(i / file->row));
 	}
-	
 }
 
 
+
+
+	// while (i < file->member -2 )
+	// {	
+    //     if(file->column > j )
+    //     {
+    //         drawLine(data,file->points[i],file->points[i + 1]);
+    //         if (file->member / file->column > (i / file->column ) -1 )
+    //             drawLine(data,file->points[i],file->points[i + file->column]);
+    //         j++;
+    //     }
+    //     else 
+    //     {
+    //         if (file->member / file->column > (i / file->column ) -1 )
+    //             drawLine(data,file->points[i],file->points[i + 1]);
+    //         else              
+    //             drawLine(data,file->points[i],file->points[i + file->column]);
+    //         j = 1;
+    //     }
+	// 	i++;
+	// }

@@ -20,7 +20,7 @@ int main()
     t_data  img;
 	t_file file;
 
-	int fd = open("test_maps/42.fdf", O_RDONLY);
+	int fd = open("test_maps/elem2.fdf", O_RDONLY);
 	if (fd < 0)
 	{
 		perror("Dosya açılmadı");
@@ -37,6 +37,7 @@ int main()
     img.img = mlx_new_image(mlx,  1080, 720);
     img.addr = (int *)mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	set_scale(&file);
+	apply_rot_matrix_map(&file);
 	draw_map(&img,&file);
     mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);  
     mlx_loop(mlx);

@@ -1,15 +1,15 @@
 #include "fdf.h"
 
 
-void put_pix(t_data *data,t_point point)
+void put_pix(t_data *data,t_point point,int color)
 {
 	if ((point.x + point.y * WIDTH) < WIDTH * HEIGHT)
-		data->addr[(point.x + point.y * WIDTH)] = 200 + point.z * 50;
+		data->addr[(point.x + point.y * WIDTH)] = color  * 500;
 
 }
 
 
-void drawLine(t_data *data,t_point point1,t_point point2) 
+void drawLine(t_data *data,t_point point1,t_point point2,int color) 
 {
     int dx = abs(point2.x - point1.x);
     int dy = abs(point2.y - point1.y);
@@ -21,7 +21,7 @@ void drawLine(t_data *data,t_point point1,t_point point2)
 
     while (1) {
 
-        put_pix(data,point1);
+        put_pix(data,point1,color);
 
         if (point1.x == point2.x && point1.y == point2.y) 
 			break;
@@ -49,42 +49,17 @@ void	draw_map(t_data *data,t_file *file)
 	{
         if(file->column > j)
         {
-            drawLine(data,file->points[i],file->points[i + 1]);
+            drawLine(data,file->points[i],file->points[i + 1],file->points[i].z * 5);
             if(i / file->column != file->row - 1)
-                drawLine(data,file->points[i],file->points[i + file->column]);
+                drawLine(data,file->points[i],file->points[i + file->column],file->points[i].z * 5);
             j++;
         }
         else
         {
             if(i / file->column != file->row - 1)
-                drawLine(data,file->points[i],file->points[i + file->column]);
+                drawLine(data,file->points[i],file->points[i + file->column],file->points[i].z * 5);
             j = 1;
         }
         i++;
-            printf("%d\n",(i / file->column));
-            printf("%d\n",(i / file->row));
 	}
 }
-
-
-
-
-	// while (i < file->member -2 )
-	// {	
-    //     if(file->column > j )
-    //     {
-    //         drawLine(data,file->points[i],file->points[i + 1]);
-    //         if (file->member / file->column > (i / file->column ) -1 )
-    //             drawLine(data,file->points[i],file->points[i + file->column]);
-    //         j++;
-    //     }
-    //     else 
-    //     {
-    //         if (file->member / file->column > (i / file->column ) -1 )
-    //             drawLine(data,file->points[i],file->points[i + 1]);
-    //         else              
-    //             drawLine(data,file->points[i],file->points[i + file->column]);
-    //         j = 1;
-    //     }
-	// 	i++;
-	// }

@@ -13,6 +13,9 @@
 #include "fdf.h"
 
 
+
+
+
 int main()
 {
 	void    *mlx;
@@ -40,6 +43,7 @@ int main()
 	apply_rot_matrix_map(&file);
 	draw_map(&img,&file);
     mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);  
+	mlx_key_hook(mlx_win,key_hook,&img);
     mlx_loop(mlx);
 
 }

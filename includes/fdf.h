@@ -29,6 +29,7 @@
 # define WIDTH 1080
 # define HEIGHT 720
 # define SCALE 20
+# define Z_SCALE 0.2
 # define TITLE "fdf_map"
 
 
@@ -55,8 +56,6 @@ typedef	struct s_file{
 }			t_file;
 
 
-
-
 typedef struct s_data {
     void    *img;
     int    *addr;
@@ -71,14 +70,23 @@ void	set_row(t_file *data,char **col);
 t_point    *set_points(t_file *data,t_point *temp);
 void    init_t_file(t_file *data);
 void	draw_map(t_data *data,t_file *file);
-void drawLine(t_data *data,t_point point1,t_point point2);
-void put_pix(t_data *data,t_point point);
+void drawLine(t_data *data,t_point point1,t_point point2,int color);
+void put_pix(t_data *data,t_point point,int color);
 void	set_scale(t_file *file);
 
 
 void	apply_rot_matrix_map(t_file *file);
 static void	apply_rot_matrix_pt(t_point *point, float x, float y, float z);
 static void	init_rot_matrix(float matrix[4][4], float x, float y, float z);
+
+
+
+void	key_hook(int key_code,t_file *file,t_data *data);
+void    draw_black(t_file *file,t_data *data);
+void	operation_z(t_file *file,char c);
+void	operation_y(t_file *file,char c);
+void    operation_x(t_file *file,char c);
+
 
 
 #endif

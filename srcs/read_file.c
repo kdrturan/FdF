@@ -9,8 +9,8 @@ void    init_t_file(t_file *data)
     data->points = (t_point*)malloc(sizeof(t_point));
     data->row = 0;
     data->column = 0;
-    data->x_rot = 30;
-    data->y_rot = 30;
+    data->x_rot = 50;
+    data->y_rot = 15;
     data->z_rot = 0;
 }
 

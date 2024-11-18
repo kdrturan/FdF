@@ -20,7 +20,7 @@ int main()
     t_data  img;
 	t_file file;
 
-	int fd = open("/home/kdrturan/FdF/test_maps/elem2.fdf", O_RDONLY);
+	int fd = open("test_maps/42.fdf", O_RDONLY);
 	if (fd < 0)
 	{
 		perror("Dosya açılmadı");

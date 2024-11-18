@@ -8,6 +8,7 @@ void    init_t_file(t_file *data)
     data->n_member = 0;
     data->points = (t_point*)malloc(sizeof(t_point));
     data->row = 0;
+    data->column = 0;
 }
 
 void	set_row(t_file *data,char **col)
@@ -17,7 +18,10 @@ void	set_row(t_file *data,char **col)
 
     i = -1;
     temp = NULL;
-
+    if(data->column == 0)
+        while (col[++i])
+            data->column++;
+    i = -1;
     while (col[++i])
     {
         if(data->member >= data->empty)

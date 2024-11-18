@@ -4,7 +4,7 @@
 void put_pix(t_data *data,t_point point)
 {
 	if ((point.x + point.y * WIDTH) < WIDTH * HEIGHT)
-		data->addr[(point.x + point.y * WIDTH)] = 200;
+		data->addr[(point.x + point.y * WIDTH)] = 200 + point.z * 50;
 
 }
 
@@ -41,13 +41,28 @@ void drawLine(t_data *data,t_point point1,t_point point2)
 void	draw_map(t_data *data,t_file *file)
 {
 	int i;
+	int j;
 
+    j = 1;
 	i = 0;
-	while (i < file->member)
+	while (i < file->member - 1)
 	{
-		drawLine(data,file->points[i],file->points[i + 1]);
+        if(file->column > j)
+        {
+            drawLine(data,file->points[i],file->points[i + 1]);
+            if (((file->row - 1)* SCALE ) != file->points[i].y)
+                drawLine(data,file->points[i],file->points[i + file->column]);
+            j++;
+        }
+        else 
+        {
+            if (((file->row - 1)* SCALE ) == file->points[i].y)
+                drawLine(data,file->points[i],file->points[i + 1]);
+            else              
+                drawLine(data,file->points[i],file->points[i + file->column]);
+            j = 1;
+        }
 		i++;
-		printf("%d\n",i);
 	}
 	
 }

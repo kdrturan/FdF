@@ -28,7 +28,7 @@
 
 # define WIDTH 1080
 # define HEIGHT 720
-# define SCALE 10
+# define SCALE 2
 # define TITLE "fdf_map"
 
 
@@ -46,6 +46,8 @@ typedef	struct s_file{
 	int member;
 	int n_member;
 	int empty;
+	int column;
+
 
 }			t_file;
 

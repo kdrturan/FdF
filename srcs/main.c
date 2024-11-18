@@ -20,7 +20,7 @@ int main()
     t_data  img;
 	t_file file;
 
-	int fd = open("/home/kdrturan/FdF/test_maps/Japan.L.fdf", O_RDONLY);
+	int fd = open("/home/kdrturan/FdF/test_maps/elem2.fdf", O_RDONLY);
 	if (fd < 0)
 	{
 		perror("Dosya açılmadı");
@@ -36,8 +36,8 @@ int main()
     mlx_win = mlx_new_window(mlx, 1080, 720, "Merhaba Dünya!");
     img.img = mlx_new_image(mlx,  1080, 720);
     img.addr = (int *)mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-
-	
+	set_scale(&file);
+	draw_map(&img,&file);
     mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);  
     mlx_loop(mlx);
 

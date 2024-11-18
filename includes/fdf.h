@@ -28,7 +28,7 @@
 
 # define WIDTH 1080
 # define HEIGHT 720
-# define SCALE 20
+# define SCALE 10
 # define TITLE "fdf_map"
 
 
@@ -65,6 +65,11 @@ void	get_values(int fd, t_file *data);
 void	set_row(t_file *data,char **col);
 t_point    *set_points(t_file *data,t_point *temp);
 void    init_t_file(t_file *data);
+void	draw_map(t_data *data,t_file *file);
+void drawLine(t_data *data,t_point point1,t_point point2);
+void put_pix(t_data *data,t_point point);
+void	set_scale(t_file *file);
+
 
 
 #endif

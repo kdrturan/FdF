@@ -23,7 +23,7 @@ void	set_row(t_file *data,char **col)
         if(data->member >= data->empty)
         {
             temp = (t_point *)malloc(data->empty * 2 * sizeof(t_point));
-            data->points = ft_memmove(temp,data->points, 12 * data->member);
+            data->points = ft_memmove(temp,data->points, sizeof(int) * 3 * data->member);
             data->empty *= 2;
         }
         data->points[data->member].x = i;

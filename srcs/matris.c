@@ -43,10 +43,7 @@ void	apply_rot_matrix_map(t_file *file)
 {
 	int		i;
 
-	i = 0;
-	while (i < file->member)
-	{
+	i = -1;
+	while (++i < file->member)
 		apply_rot_matrix_pt(&(file->points[i]), file->x_rot, file->y_rot, file->z_rot);
-		i++;
-	}
 }

@@ -31,8 +31,17 @@
 # define SCALE 40
 # define Z_SCALE 0.2
 # define DELTA	10
-# define TITLE "fdf_map"
+# define TITLE "Hello Fdf!"
 
+typedef struct s_line
+{
+	int dx;
+    int dy;
+    int sx; 
+    int sy; 
+    int err;
+	int e2;
+}	t_line;
 
 
 
@@ -77,7 +86,6 @@ void put_pix(t_data *data,t_point point,int color);
 void	set_scale(t_file *file);
 int key_control(int key_code,void *param);
 void	error_control(char *error,t_file *data);
-
 
 void	apply_rot_matrix_map(t_file *file);
 static void	apply_rot_matrix_pt(t_point *point, float x, float y, float z);

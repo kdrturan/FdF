@@ -3,9 +3,8 @@
 
 void put_pix(t_data *data,t_point point,int color)
 {
-	if ((point.x + point.y * WIDTH) < WIDTH * HEIGHT)
-		data->addr[(point.x + point.y * WIDTH)] = color  * 500;
-
+	if ((point.x + point.y * WIDTH) < WIDTH * HEIGHT && (point.x + point.y * WIDTH) > 0)
+		data->addr[(point.x + point.y * WIDTH)] = color + point.z * 200;
 }
 
 
@@ -46,18 +45,19 @@ void	draw_map(t_data *data,t_file *file)
     j = 1;
 	i = 0;
 	while (i < file->member)
-	{
+	{	
+
         if(file->column > j)
         {
-            drawLine(data,file->points[i],file->points[i + 1],file->points[i].z * 5);
+            drawLine(data,file->points[i],file->points[i + 1],file->points->color);
             if(i / file->column != file->row - 1)
-                drawLine(data,file->points[i],file->points[i + file->column],file->points[i].z * 5);
+                drawLine(data,file->points[i],file->points[i + file->column],file->points->color);
             j++;
         }
         else
         {
             if(i / file->column != file->row - 1)
-                drawLine(data,file->points[i],file->points[i + file->column],file->points[i].z * 5);
+                drawLine(data,file->points[i],file->points[i + file->column],file->points->color);
             j = 1;
         }
         i++;

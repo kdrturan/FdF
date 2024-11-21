@@ -74,12 +74,12 @@ static  void	set_row(t_file *data,char **col)
     data->row++;
 }
 
-int	get_values(t_file *data)
+int	get_values(char **argv,t_file *data)
 {
     char *values;
 
     
-    data->fd =  open("test_maps/42.fdf", O_RDONLY);
+    data->fd =  open(argv[1], O_RDONLY);
 	if (data->fd < 0)
         error_control("No such file",data);
     while (1)

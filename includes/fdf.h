@@ -76,7 +76,8 @@ typedef struct s_data {
 }               t_data;
 
 
-int	get_values(t_file *data);
+
+int	get_values(char **argv,t_file *data);
 void	set_row(t_file *data,char **col);
 t_point    *set_points(t_file *data,t_point *temp);
 void    init_t_file(t_file *data);

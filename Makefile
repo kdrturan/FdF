@@ -1,3 +1,24 @@
+NAME = fdf.a
+CC = cc
+SRCS = fdf_utils.c	fdf.c	matris.c	putpix.c	read_files.c
+OBJS = fdf_utils.o	fdf.o	matris.o	putpix.o	read_files.o
+
+
+all: $(NAME)
+
+$(NAME):$(OBJS)
+	ar rc  $(NAME) $(OBJS) 
+
+clean:
+	$(RM) $(OBJS)
+
+fclean:
+	$(RM) $(OBJS) $(NAME)
+
+re: fclean all
+	
+.PHONY: fclean all re clean
+
 
 compile: compile_libs compile_fdf reset_libs
 
@@ -8,16 +29,13 @@ full_run: update_libs compile_libs compile_fdf reset_libs
 	@./fdf
 
 compile_fdf:
-	@cc srcs/*.c \
+	@cc $(SRCS) \
 	-I./includes \
-	\
 	-I./libs/libft \
 	-I./libs/get_next_line \
 	-I./libs/minilibx-linux \
-	\
 	libs/libft/libft.a \
 	libs/get_next_line/get_next_line.a \
-	\
 	-L./libs/minilibx-linux \
 	-lmlx -lX11 -lXext -lm -o fdf
 

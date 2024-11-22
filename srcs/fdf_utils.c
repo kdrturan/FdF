@@ -1,13 +1,19 @@
 #include "fdf.h"
 
-int	key_control(int key_code, void *param)
+int	key_control(int key_code, t_file *param)
 {
-	if (key_code == XK_Escape)
+	if (key_code == XK_Escape || key_code == 17)
+	{
+		free(param->points);
+		mlx_destroy_image();
 		exit(0);
+	}
+	return (0);
 }
 
 void	error_control(char *error, t_file *data)
 {
+	free(data->points);
 	perror(error);
 	close(data->fd);
 	exit(-1);
@@ -26,18 +32,4 @@ void	init_t_file(t_file *data)
 	data->x_rot = 40;
 	data->y_rot = 15;
 	data->z_rot = 0;
-}
-
-void	set_scale(t_file *file)
-{
-	int	i;
-
-	i = 0;
-	while (i < file->member)
-	{
-		file->points[i].x *= SCALE;
-		file->points[i].y *= SCALE;
-		file->points[i].z *= 1;
-		i++;
-	}
 }

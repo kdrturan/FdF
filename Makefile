@@ -29,7 +29,7 @@ full_run: update_libs compile_libs compile_fdf reset_libs
 	@./fdf
 
 compile_fdf:
-	@cc $(SRCS) \
+	@cc srcs/*.c  \
 	-I./includes \
 	-I./libs/libft \
 	-I./libs/get_next_line \

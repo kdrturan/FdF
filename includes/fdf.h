@@ -26,8 +26,8 @@
 
 #define WIDTH 1080
 #define HEIGHT 720
-#define SCALE 40
-#define Z_SCALE 0.2
+#define SCALE 60
+#define Z_SCALE 0.6
 #define DELTA 10
 #define TITLE "Hello Fdf!"
 
@@ -39,15 +39,36 @@ typedef struct s_line
 	int	sy;
 	int	err;
 	int	e2;
+	float hip;
+	float r_step;
+	float g_step;
+	float b_step;
+	float r ;
+	float g ;
+	float b ;
 } t_line;
+
+
+typedef union u_color
+{
+	struct 
+	{
+		__uint8_t	b;
+		__uint8_t	g;
+		__uint8_t	r;
+		__uint8_t	a;
+	};
+	__uint32_t	clr;
+}	t_color;
 
 typedef struct s_point
 {
 	int	x;
 	int	y;
 	int	z;
-	int	color;
+	t_color color;
 } t_point;
+
 
 typedef struct s_file
 {
@@ -77,10 +98,10 @@ void		et_row(t_file *data, char **col);
 t_point		*set_points(t_file *data, t_point *temp);
 void		init_t_file(t_file *data);
 void		draw_map(t_data *data, t_file *file);
-void		drawLine(t_data *data, t_point point1, t_point point2, int color);
-void		put_pix(t_data *data, t_point point, int color);
+void		drawLine(t_data *data, t_point point1, t_point point2);
+void    put_pix(t_data *data, t_point point, t_color color);
 void		set_scale(t_file *file);
-int			key_control(int key_code, void *param);
+int			key_control(int key_code, t_file *param);
 void		error_control(char *error, t_file *data);
 
 void		apply_rot_matrix_map(t_file *file);

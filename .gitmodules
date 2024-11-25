@@ -1,6 +1,6 @@
 [submodule "libs/get_next_line"]
 	path = libs/get_next_line
-	url = https://github.com/Tuncayarda/42_Get_next_line
+	url = https://github.com/kdrturan/get_next_line.git
 	branch = main
 [submodule "libs/libft"]
 	path = libs/libft

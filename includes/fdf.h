@@ -6,7 +6,7 @@
 /*   By: abturan <abturan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:33:16 by abturan           #+#    #+#             */
-/*   Updated: 2024/11/25 18:36:50 by abturan          ###   ########.fr       */
+/*   Updated: 2024/11/25 19:36:18 by abturan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,13 @@
 # include <X11/keysym.h>
 # include <fcntl.h>
 # include <math.h>
-# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 
-# define WIDTH		1080
-# define HEIGHT		720
-# define SCALE		55
-# define Z_SCALE	0.6
-# define DELTA		10
+# define WIDTH		3000
+# define HEIGHT		2000
+# define SCALE		5
+# define Z_SCALE	0.7
 # define TITLE		"Hello Fdf!"
 # define FORMAT		".fdf"
 # define INVINP		"Invalid Input"
@@ -123,6 +121,7 @@ void	error_control(int cntrl, t_mlx *param);
 void	apply_rot_matrix_map(t_file *file);
 int		index_hex(char ch);
 int		ft_puthex(char *str, t_file *data);
+void	get_center(t_file *file);
 
 
 #endif

@@ -6,11 +6,23 @@
 /*   By: abturan <abturan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:13:20 by abturan           #+#    #+#             */
-/*   Updated: 2024/11/25 18:42:55 by abturan          ###   ########.fr       */
+/*   Updated: 2024/11/25 19:31:01 by abturan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+int	key_control1(t_mlx *param)
+{
+	mlx_destroy_image(param->mlx, param->data->img);
+	mlx_destroy_window(param->mlx, param->mlx_win);
+	if (param->file->points)
+		free(param->file->points);
+	if (param->file->fd > 2)
+		close(param->file->fd);
+	free(param->mlx);
+	exit(0);
+}
 
 void	init_program(t_mlx *mlx_st, char *argv)
 {
@@ -28,12 +40,14 @@ void	init_program(t_mlx *mlx_st, char *argv)
 	cntrl = get_values(argv, mlx_st->file);
 	if (cntrl < 0)
 		error_control(cntrl, mlx_st);
+		
+	get_center(mlx_st->file);
 	apply_rot_matrix_map(mlx_st->file);
 	draw_map(mlx_st->data, mlx_st->file);
 	mlx_put_image_to_window(mlx_st->mlx, mlx_st->mlx_win,
 		mlx_st->data->img, 0, 0);
 	mlx_key_hook(mlx_st->mlx_win, key_control, mlx_st);
-	mlx_hook(mlx_st->mlx_win, 17, 0, key_control, mlx_st);
+	mlx_hook(mlx_st->mlx_win, 17, 0, key_control1, mlx_st);
 	mlx_loop(mlx_st->mlx);
 	close(mlx_st->file->fd);
 }

@@ -1,61 +1,64 @@
-NAME = fdf.a
-CC = cc
-SRCS = fdf_utils.c	fdf.c	matris.c	putpix.c	read_files.c
-OBJS = fdf_utils.o	fdf.o	matris.o	putpix.o	read_files.o
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: abturan <abturan@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/11/25 16:33:29 by abturan           #+#    #+#              #
+#    Updated: 2024/11/25 16:33:30 by abturan          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
+NAME = fdf
+CC = cc
+CFLAGS = #-Wall -Wextra -Werror
+LIBFT = libs/libft/libft.a
+GNL = libs/get_next_line/get_next_line.a
+MINILIBX = libs/minilibx-linux/libmlx_Linux.a
+
+SRCS =  srcs/*.c
 
 all: $(NAME)
 
-$(NAME):$(OBJS)
-	ar rc  $(NAME) $(OBJS) 
-
-clean:
-	$(RM) $(OBJS)
-
-fclean:
-	$(RM) $(OBJS) $(NAME)
-
-re: fclean all
-	
-.PHONY: fclean all re clean
-
-
-compile: compile_libs compile_fdf reset_libs
-
-fast_run: compile_libs compile_fdf reset_libs
-	@./fdf
-
-full_run: update_libs compile_libs compile_fdf reset_libs
-	@./fdf
-
-compile_fdf:
-	@cc  srcs/*.c  \
+$(NAME): $(LIBFT) $(GNL) $(MINILIBX)
+	$(CC) $(CFLAGS) $(SRCS) \
 	-I./includes \
+	\
 	-I./libs/libft \
 	-I./libs/get_next_line \
 	-I./libs/minilibx-linux \
+	\
 	libs/libft/libft.a \
 	libs/get_next_line/get_next_line.a \
+	\
 	-L./libs/minilibx-linux \
 	-lmlx -lX11 -lXext -lm -o fdf
 
-compile_libs:
+$(LIBFT):
 	@make -sC libs/libft
-	@make -sC libs/get_next_line
-	@make -sC libs/minilibx-linux
-	@make clean -sC libs/libft
-	@make clean -sC libs/get_next_line
 
-valgrind: compile
-	valgrind --leak-check=full ./fdf
+$(GNL):
+	@make -sC libs/get_next_line
+
+$(MINILIBX):
+	@git clone https://github.com/42Paris/minilibx-linux.git libs/minilibx-linux  
+	@make -sC libs/minilibx-linux
+
+clean:
+	@make fclean -sC libs/libft
+	@make fclean -sC libs/get_next_line
+
+
+fclean: clean
+	@rm -rf $(NAME) libs/minilibx-linux
+
+re: fclean all
+
+.PHONY: all clean fclean re
 
 update_libs:
 	@git submodule update --init --recursive --remote
-
-reset_libs:
-	@cd libs/get_next_line && rm -f *.a
-	@cd libs/libft && rm -f *.a
-
 
 git_push: update_libs
 	@git add .

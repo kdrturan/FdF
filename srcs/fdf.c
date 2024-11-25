@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tuaydin <tuaydin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abturan <abturan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 20:26:35 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/11/15 14:33:53 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/11/25 16:29:46 by abturan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	init_program(t_mlx	*mlx_st,char *argv)
 
 
 
-int	main(int argc, char **argv)
+int	main(int argc, char *argv[])
 {
 	t_mlx	mlx_st;
 	t_data	data;
@@ -46,8 +46,8 @@ int	main(int argc, char **argv)
 
 	mlx_st.file = &file;
 	mlx_st.data = &data;
-	//if (argc == 2)
-		init_program(&mlx_st,argv[1]);
+	if (argc == 2)
+		init_program(&mlx_st, argv[1]);
 	perror("İnvalid input");
 	return (-1);
 }

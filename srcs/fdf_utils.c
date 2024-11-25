@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abturan <abturan@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/25 17:17:27 by abturan           #+#    #+#             */
+/*   Updated: 2024/11/25 17:17:33 by abturan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-int key_control(int key_code, t_mlx *param)
+int	key_control(int key_code, t_mlx *param)
 {
 	if (key_code == XK_Escape || key_code == 17)
 	{
@@ -16,7 +28,7 @@ int key_control(int key_code, t_mlx *param)
 	return (0);
 }
 
-void error_control(int cntrl, t_mlx *param)
+void	error_control(int cntrl, t_mlx *param)
 {
 	if (cntrl == -1)
 		perror(INVINP);
@@ -36,7 +48,7 @@ void error_control(int cntrl, t_mlx *param)
 	exit(1);
 }
 
-int init_t_file(t_file *data)
+int	init_t_file(t_file *data)
 {
 	data->empty = 1;
 	data->member = 0;

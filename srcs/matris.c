@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   matris.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abturan <abturan@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/25 17:15:32 by abturan           #+#    #+#             */
+/*   Updated: 2024/11/25 17:17:10 by abturan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 static	void	init_rot_matrix(float matrix[4][4], float x, float y, float z)
@@ -22,17 +34,19 @@ static	void	init_rot_matrix(float matrix[4][4], float x, float y, float z)
 
 static	void	apply_rot_matrix_pt(t_point *point, float x, float y, float z)
 {
-	float matrix[4][4];
-	float x_new;
-	float y_new;
-	float z_new;
+	float	matrix[4][4];
+	float	x_new;
+	float	y_new;
+	float	z_new;
 
 	x = x * (3.14f / 180);
 	y = y * (3.14f / 180);
 	z = z * (3.14f / 180);
 	init_rot_matrix(matrix, x, y, z);
-	x_new = matrix[0][0] * point->x + matrix[0][1] * point->y + matrix[0][2] * point->z + matrix[0][3] * 1;
-	y_new = matrix[1][0] * point->x + matrix[1][1] * point->y + matrix[1][2] * point->z + matrix[1][3] * 1;
+	x_new = matrix[0][0] * point->x + matrix[0][1]
+		* point->y + matrix[0][2] * point->z + matrix[0][3] * 1;
+	y_new = matrix[1][0] * point->x + matrix[1][1]
+		* point->y + matrix[1][2] * point->z + matrix[1][3] * 1;
 	point->x = x_new;
 	point->y = y_new;
 }
@@ -43,5 +57,6 @@ void	apply_rot_matrix_map(t_file *file)
 
 	i = -1;
 	while (++i < file->member)
-		apply_rot_matrix_pt(&(file->points[i]), file->x_rot, file->y_rot, file->z_rot);
+		apply_rot_matrix_pt(&(file->points[i]),
+			file->x_rot, file->y_rot, file->z_rot);
 }

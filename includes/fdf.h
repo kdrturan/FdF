@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef FDF_H
 #define FDF_H
 
@@ -39,83 +38,79 @@
 
 typedef struct s_line
 {
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	err;
-	int	e2;
+	int dx;
+	int dy;
+	int sx;
+	int sy;
+	int err;
+	int e2;
 	float hip;
 	float r_step;
 	float g_step;
 	float b_step;
-	float r ;
-	float g ;
-	float b ;
+	float r;
+	float g;
+	float b;
 } t_line;
-
-
-
 
 typedef union u_color
 {
-	struct 
+	struct
 	{
-		__uint8_t	b;
-		__uint8_t	g;
-		__uint8_t	r;
-		__uint8_t	a;
+		__uint8_t b;
+		__uint8_t g;
+		__uint8_t r;
+		__uint8_t a;
 	};
-	__uint32_t	clr;
-}	t_color;
+	__uint32_t clr;
+} t_color;
 
 typedef struct s_point
 {
-	int	x;
-	int	y;
-	int	z;
+	int x;
+	int y;
+	int z;
 	t_color color;
 } t_point;
 
-
 typedef struct s_file
 {
-	t_point	*points;
-	int	row;
-	int	member;
-	int	n_member;
-	int	empty;
-	int	column;
-	float	x_rot;
-	float	y_rot;
-	float	z_rot;
-	int	fd;
+	t_point *points;
+	int row;
+	int member;
+	int n_member;
+	int empty;
+	int column;
+	float x_rot;
+	float y_rot;
+	float z_rot;
+	int fd;
 } t_file;
 
 typedef struct s_data
 {
-	void	*img;
-	int	*addr;
-	int	bits_per_pixel;
-	int	line_length;
-	int	endian;
+	void *img;
+	int *addr;
+	int bits_per_pixel;
+	int line_length;
+	int endian;
 } t_data;
 
 typedef struct s_mlx
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_data	*data;
-	t_file	*file;
-}	t_mlx;
-int			get_values(char *argv, t_file *data);
-t_point		*set_points(t_file *data, t_point *temp);
-int	init_t_file(t_file *data);
-void		draw_map(t_data *data, t_file *file);
-void		drawLine(t_data *data, t_point point1, t_point point2);
-void    put_pix(t_data *data, t_point point, t_color color);
-int	key_control(int key_code, t_mlx *param);
-void	error_control(int cntrl, t_mlx *param);
-void		apply_rot_matrix_map(t_file *file);
+	void *mlx;
+	void *mlx_win;
+	t_data *data;
+	t_file *file;
+} t_mlx;
+int get_values(char *argv, t_file *data);
+t_point *set_points(t_file *data, t_point *temp);
+int init_t_file(t_file *data);
+void draw_map(t_data *data, t_file *file);
+void drawLine(t_data *data, t_point point1, t_point point2);
+void put_pix(t_data *data, t_point point, t_color color);
+int key_control(int key_code, t_mlx *param);
+void error_control(int cntrl, t_mlx *param);
+void apply_rot_matrix_map(t_file *file);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: abturan <abturan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:13:20 by abturan           #+#    #+#             */
-/*   Updated: 2024/11/25 17:15:08 by abturan          ###   ########.fr       */
+/*   Updated: 2024/11/25 18:42:55 by abturan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int argc, char *argv[])
 	t_mlx	mlx_st;
 	t_data	data;
 	t_file	file;
-
+	
 	mlx_st.file = &file;
 	mlx_st.data = &data;
 	if (argc == 2)

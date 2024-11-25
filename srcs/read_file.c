@@ -82,13 +82,12 @@ int	get_values(char *argv, t_file *data)
 	t_get_val	get_val;
 	int			i;
 
-	i = 0;
-	printf("%s\n",argv);
+	i = -1;
 	get_val.file_f = ft_strrchr(argv, '.');
-	while (i < 4)
+	while (++i < 4)
 		if (!get_val.file_f && get_val.file_f[i] != FORMAT[i])
 			return (-4);
-	data->fd = open("/home/kdrturan/fdf_42/test_maps/42.fdf", O_RDONLY);
+	data->fd = open(argv, O_RDONLY);
 	if (data->fd < 0)
 		return (-3);
 	while (1)

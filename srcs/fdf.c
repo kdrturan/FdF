@@ -12,29 +12,42 @@
 
 #include "fdf.h"
 
+
+void	init_program(t_mlx	*mlx_st,char *argv)
+{
+	int cntrl;
+
+	mlx_st -> mlx = mlx_init();
+	mlx_st -> mlx_win = mlx_new_window(mlx_st -> mlx, WIDTH, HEIGHT, TITLE);
+	mlx_st -> data->img = mlx_new_image(mlx_st -> mlx, WIDTH, HEIGHT);
+	mlx_st -> data->addr = (int *)mlx_get_data_addr(mlx_st -> data->img, &mlx_st -> data->bits_per_pixel, &mlx_st -> data->line_length, &mlx_st -> data->endian);
+	cntrl = init_t_file(mlx_st -> file);
+	if (cntrl < 0)
+		error_control(cntrl,mlx_st);
+	cntrl = get_values(argv,mlx_st -> file);
+	if (cntrl < 0)
+		error_control(cntrl,mlx_st);
+	apply_rot_matrix_map(mlx_st -> file);
+	draw_map(mlx_st -> data, mlx_st -> file);
+	mlx_put_image_to_window(mlx_st -> mlx, mlx_st -> mlx_win, mlx_st -> data->img, 0, 0);
+	mlx_key_hook(mlx_st -> mlx_win, key_control, mlx_st);
+	mlx_hook(mlx_st -> mlx_win, 17, 0, key_control, mlx_st);
+	mlx_loop(mlx_st -> mlx);
+	close(mlx_st -> file->fd);
+}
+
+
+
 int	main(int argc, char **argv)
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_data	img;
+	t_mlx	mlx_st;
+	t_data	data;
 	t_file	file;
 
+	mlx_st.file = &file;
+	mlx_st.data = &data;
 	//if (argc == 2)
-	//{
-		mlx = mlx_init();
-		mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, TITLE);
-		img.img = mlx_new_image(mlx, WIDTH, HEIGHT);
-		img.addr = (int *)mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-		init_t_file(&file);
-		get_values(argv, &file);
-		apply_rot_matrix_map(&file);
-		draw_map(&img, &file);
-		mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-		mlx_key_hook(mlx_win, key_control, &file);
-		mlx_hook(mlx_win, 17, 1L << 17, key_control, &file);
-		mlx_loop(mlx);
-		close(file.fd);
-		return (0);
-	//}
-	//error_control("İnvalid input", &file);
+		init_program(&mlx_st,argv[1]);
+	perror("İnvalid input");
+	return (-1);
 }

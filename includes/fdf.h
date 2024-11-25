@@ -26,10 +26,15 @@
 
 #define WIDTH 1080
 #define HEIGHT 720
-#define SCALE 60
+#define SCALE 55
 #define Z_SCALE 0.6
 #define DELTA 10
 #define TITLE "Hello Fdf!"
+#define FORMAT ".fdf"
+#define INVINP "Invalid Input"
+#define INVFORMAT "Invalid Format"
+#define MALLERR "Malloc Error"
+#define FILEERR "No Such File or Directory"
 
 typedef struct s_line
 {
@@ -47,6 +52,8 @@ typedef struct s_line
 	float g ;
 	float b ;
 } t_line;
+
+
 
 
 typedef union u_color
@@ -93,19 +100,21 @@ typedef struct s_data
 	int	endian;
 } t_data;
 
-int			get_values(char **argv, t_file *data);
-void		et_row(t_file *data, char **col);
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*mlx_win;
+	t_data	*data;
+	t_file	*file;
+}	t_mlx;
+int			get_values(char *argv, t_file *data);
 t_point		*set_points(t_file *data, t_point *temp);
-void		init_t_file(t_file *data);
+int	init_t_file(t_file *data);
 void		draw_map(t_data *data, t_file *file);
 void		drawLine(t_data *data, t_point point1, t_point point2);
 void    put_pix(t_data *data, t_point point, t_color color);
-void		set_scale(t_file *file);
-int			key_control(int key_code, t_file *param);
-void		error_control(char *error, t_file *data);
-
+int	key_control(int key_code, t_mlx *param);
+void	error_control(int cntrl, t_mlx *param);
 void		apply_rot_matrix_map(t_file *file);
-static void	apply_rot_matrix_pt(t_point *point, float x, float y, float z);
-static void	init_rot_matrix(float matrix[4][4], float x, float y, float z);
 
 #endif

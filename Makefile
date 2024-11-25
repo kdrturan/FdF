@@ -29,7 +29,7 @@ full_run: update_libs compile_libs compile_fdf reset_libs
 	@./fdf
 
 compile_fdf:
-	@cc srcs/*.c  \
+	@cc  srcs/*.c  \
 	-I./includes \
 	-I./libs/libft \
 	-I./libs/get_next_line \
@@ -47,7 +47,7 @@ compile_libs:
 	@make clean -sC libs/get_next_line
 
 valgrind: compile
-	valgrind ./fdf
+	valgrind --leak-check=full ./fdf
 
 update_libs:
 	@git submodule update --init --recursive --remote
